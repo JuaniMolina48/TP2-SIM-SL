@@ -6,9 +6,9 @@ st.title("Generador de Números Aleatorios")
 
 # Entrada de parámetros
 distribucion = {"Normal": "N",
-                        "Uniforme": "U",
-                        "Exponencial": "EN",
-                        "Poisson": "P"}
+                "Uniforme": "U",
+                "Exponencial": "EN",
+                "Poisson": "P"}
 
 dist_choice = st.selectbox("Selecciona una distribución", distribucion)
 muestras = []
