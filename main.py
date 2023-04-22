@@ -5,8 +5,12 @@ import soporte.simulacion as sim
 st.title("Generador de Números Aleatorios")
 
 # Entrada de parámetros
-dist_options = ["Normal", "Uniforme", "Exponencial", "Poisson"]
-dist_choice = st.selectbox("Selecciona una distribución", dist_options)
+distribucion = {"Normal": "N",
+                        "Uniforme": "U",
+                        "Exponencial": "EN",
+                        "Poisson": "P"}
+
+dist_choice = st.selectbox("Selecciona una distribución", distribucion)
 muestras = []
 cant_intervalos = 1
 
@@ -35,6 +39,9 @@ if dist_choice in ["Normal", "Uniforme", "Exponencial"]:
         fig = sim.generar_histograma_continua(muestras, cant_intervalos)
         st.plotly_chart(fig)
 
+        t_datos = sim.calcular_frecuencias_continua(muestras, cant_intervalos, distribucion[dist_choice])
+        st.table(t_datos)
+
 
 elif dist_choice == "Poisson":
     lam = st.number_input("Lambda", value=5.0, step=0.1)
@@ -44,3 +51,6 @@ elif dist_choice == "Poisson":
     if st.button("Generar Histograma Poisson"):
         fig = sim.generar_histograma_poisson(muestras)
         st.plotly_chart(fig)
+
+        t_datos = sim.calcular_frecuencias_poisson(muestras)
+        st.table(t_datos)
